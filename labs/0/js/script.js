@@ -120,27 +120,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   class ScreenSize {
-    constructor() {
-      this.width = window.innerWidth;
-      this.height = window.innerHeight;
-    }
 
     getWidth() {
-      return this.width;
+      return window.innerWidth;
     }
 
     getHeight() {
-      return this.height;
-    }
-
-    // Pass a callback function to onChange, it will be called whenever the window size changes
-    onChange(callback) {
-      const handleResize = () => {
-        this.width = window.innerWidth;
-        this.height = window.innerHeight;
-        callback();
-      };
-      window.addEventListener("resize", handleResize);
+      return window.innerHeight;
     }
   }
 
@@ -232,8 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
         button.addEventListener("click", () => {
           this.gameState.currentStep++;
           if (
-            id + GAME_CONFIG.BUTTON_NUMBER_ONE ===
-              this.gameState.currentStep &&
+            id + GAME_CONFIG.BUTTON_NUMBER_ONE === this.gameState.currentStep &&
             id + GAME_CONFIG.BUTTON_NUMBER_ONE < numOfButtons
           ) {
             button.textContent = id + GAME_CONFIG.BUTTON_NUMBER_ONE;
