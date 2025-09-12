@@ -3,7 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lab 1: JSON, Object Constructor, localStorage - Ian Chan</title>
+    <title id="lab-title">
+      Lab 1: JSON, Object Constructor, localStorage - Ian Chan
+    </title>
   </head>
-  <body></body>
+  <body>
+    <h1 id="lab-title-h1">Lab 1: JSON, Object Constructor, localStorage</h1>
+    <p id="student-name">Student name: Ian Chan</p>
+
+    <a
+      href="./files/writer.html"
+      style="margin-right: 20px; text-decoration: none"
+    >
+      <button type="button" id="writer-btn">Writer</button>
+    </a>
+    <a href="./files/reader.html">
+      <button type="button" id="reader-btn">Reader</button>
+    </a>
+    <script src="lang/messages/en/user.js"></script>
+    <script>
+      // Replace static text with messages from window.messages
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.messages) {
+          const labTitle = document.getElementById("lab-title");
+          if (labTitle)
+            labTitle.textContent =
+              window.messages.labTitle + " - " + window.messages.studentName;
+          const labTitleH1 = document.getElementById("lab-title-h1");
+          if (labTitleH1) labTitleH1.textContent = window.messages.labTitle;
+          const studentName = document.getElementById("student-name");
+          if (studentName)
+            studentName.textContent = window.messages.studentName;
+          const writerBtn = document.getElementById("writer-btn");
+          if (writerBtn) writerBtn.textContent = window.messages.writer;
+          const readerBtn = document.getElementById("reader-btn");
+          if (readerBtn) readerBtn.textContent = window.messages.reader;
+        }
+      });
+    </script>
+  </body>
 </html>
