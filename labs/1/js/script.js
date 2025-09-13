@@ -1,4 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // User-facing string constants
+  const MSG_STORED_AT = window.messages?.storedAt;
+  const MSG_UPDATED_AT = window.messages?.updatedAt;
+  const MSG_REMOVE = window.messages?.remove;
+  const MSG_ADD = window.messages?.add;
+  const MSG_BACK = window.messages?.back;
+  const MSG_WRITER = window.messages?.writer;
+  const MSG_READER = window.messages?.reader;
+  
   // Create and style the 'stored at' timestamp element
   const storedAtDiv = document.createElement("div");
   storedAtDiv.id = "stored-at";
@@ -9,8 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const now = new Date();
     const formatted = now.toLocaleString();
     storedAtDiv.textContent = window.location.pathname.endsWith("writer.html")
-      ? window.messages.storedAt(formatted)
-      : window.messages.updatedAt(formatted);
+      ? MSG_STORED_AT(formatted)
+      : MSG_UPDATED_AT(formatted);
     localStorage.setItem("notes_stored_at", formatted);
   }
 
@@ -19,8 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const lastStored = localStorage.getItem("notes_stored_at");
     if (lastStored) {
       storedAtDiv.textContent = window.location.pathname.endsWith("writer.html")
-        ? window.messages.storedAt(lastStored)
-        : window.messages.updatedAt(lastStored);
+        ? MSG_STORED_AT(lastStored)
+        : MSG_UPDATED_AT(lastStored);
     }
   }
   setStoredAtFromLocalStorage();
@@ -53,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       const removeButton = document.createElement("button");
-      removeButton.textContent = window.messages.remove;
+      removeButton.textContent = MSG_REMOVE;
 
       // When the remove button is clicked, remove the note
       removeButton.addEventListener("click", () => {
@@ -84,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
       this.renderAll();
       // Add event listener to the add button (if it exists)
       if (this.addButton) {
-        this.addButton.textContent = window.messages.add;
+        this.addButton.textContent = MSG_ADD;
         this.addButton.addEventListener("click", () => this.addNote());
       }
     }
@@ -196,14 +205,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Set UI text content from centralized user messages
+  // Set UI text content from centralized user messages (for localization and consistency)
   if (window.messages) {
     const readerTitle = document.getElementById("reader-title");
-    if (readerTitle) readerTitle.textContent = window.messages.reader;
+    if (readerTitle) readerTitle.textContent = MSG_READER;
     const backBtn = document.getElementById("back-button");
-    if (backBtn) backBtn.textContent = window.messages.back;
+    if (backBtn) backBtn.textContent = MSG_BACK;
     const writerTitle = document.getElementById("writer-title");
-    if (writerTitle) writerTitle.textContent = window.messages.writer;
+    if (writerTitle) writerTitle.textContent = MSG_WRITER;
     const addBtn = document.getElementById("add-button");
-    if (addBtn) addBtn.textContent = window.messages.add;
+    if (addBtn) addBtn.textContent = MSG_ADD;
   }
 });
