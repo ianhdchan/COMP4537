@@ -1,9 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Ensure messages are loaded
-  if (!window.messages) {
-    console.error("User messages not loaded");
-    return;
-  }
   // Create and style the 'stored at' timestamp element
   const storedAtDiv = document.createElement("div");
   storedAtDiv.id = "stored-at";
@@ -123,6 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update a note's text and save
     updateNote(updatedNote) {
       const idx = this.notes.findIndex((n) => n.id === updatedNote.id);
+      // If no note with idx equals to -1, then update note's text and save the note
       if (idx !== -1) {
         this.notes[idx].text = updatedNote.text;
         this.saveNotes();
@@ -199,6 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Set UI text content from centralized user messages
   if (window.messages) {
     const readerTitle = document.getElementById("reader-title");
     if (readerTitle) readerTitle.textContent = window.messages.reader;
